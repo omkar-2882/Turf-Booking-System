@@ -1,0 +1,45 @@
+/* BottomSection.css */
+.bottom-section {
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+  
+  .bottom-section .footer-column {
+    width: 20%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  .bottom-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .bottom-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .bottom-section ul li {
+    margin-bottom: 5px;
+  }
+  
+  .bottom-section form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .bottom-section form input {
+    width: 90%;
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .bottom-section form button {
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
