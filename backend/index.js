@@ -56,7 +56,7 @@ app.post("/register", (req, res) => {
       } else {
         console.log("Registration successful!");
         user.id = result.insertId;
-        sendToken(user, 201, res);
+        sendToken("user", user, 201, res);
         // return res.status(200).json({ message: "Registration successful", result });
       }
     }
@@ -87,7 +87,7 @@ app.post("/login", (req, res) => {
       }
 
       // Password is correct, generate and send token or any other authentication logic
-      sendToken(result[0], 201, res);
+      sendToken("user",result[0], 201, res);
       // res.status(200).json({ message: "Login successful", user });
     }
   );
@@ -116,7 +116,7 @@ app.post("/managerLogin", (req, res) => {
       }
 
       // Password is correct, generate and send token or any other authentication logic
-      sendToken(result[0], 201, res);
+      sendToken("manager",result[0], 201, res);
       // res.status(200).json({ message: "Manager login successful", manager });
     }
   );

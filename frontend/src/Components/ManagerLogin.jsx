@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Cookies from 'js-cookie';
 import "./Login.css";
 
-const ManagerLogin = () => {
+const ManagerLogin = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,12 +26,13 @@ const ManagerLogin = () => {
         password,
       });
 
-      const { success, token } = response.data;
+      const { success, curruser, token } = response.data;
 
       if (success) {
         // Login successful
         Cookies.set('token', token);
-        history.push('/bookingManager');   
+        Cookies.set('user', curruser);
+        history.push('/');   
         window.location.reload();   
       } else {
         // Login failed

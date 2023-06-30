@@ -9,9 +9,20 @@ import Registration from "./Components/Registration";
 import MainContent from "./Components/MainContent";
 import BookingManager from "./Components/BookingManager";
 import TurfDetailsPage from "./Components/TurfDetailsPage";
+import LoginMaster from "./Components/LoginMaster";
+
+import turf from "./turf.jpg"
 
 function App() {
   const [isLoggedin, setisLoggedin] = useState(false); // Set initial value to false
+  const [user, setUser] = useState("user");
+
+  useEffect(() => {
+    const user = Cookies.get("user");
+    if (user && user == "manager") {
+      setUser("manager");
+    }
+  }, []);
 
   useEffect(() => {
     const checkTokenExpiration = () => {
@@ -24,6 +35,7 @@ function App() {
     };
 
     checkTokenExpiration();
+    // console.log(isLoggedin);
   }, []);
 
   const hasTokenExpired = (token) => {
@@ -46,29 +58,47 @@ function App() {
   };
 
   return (
-    <Router>
-      <Switch>
-        <Route path="/userlogin" component={UserLogin} />
-        <Route path="/managerlogin" component={ManagerLogin} />
-        <Route path="/register" component={Registration} />
-      </Switch>
-      <Router>
-        {isLoggedin ? (
-          <div>
-            <Navbar />
-            <Switch>
-              <Route path="/bookingManager" component={BookingManager} />
-              <Route path="/turfDetails" component={TurfDetailsPage} />
-              <Route path="/" component={MainContent} />
-            </Switch>
-            <BottomSection/>
-          </div>
-        ) : (
-          <UserLogin />
-        )}
-      </Router>
-    </Router>
+    <>
+      <div>
+        {/* <Layout /> */}
+        <Router>
+          {/* <Navbar/> */}
+          <Switch>
+            <Route path="/userlogin" component={UserLogin} />
+            <Route path="/managerlogin" component={ManagerLogin} />
+            <Route path="/register" component={Registration} />
+            <Route path="/loginMaster" component={LoginMaster} />
+            {/* <Router> */}
+              {isLoggedin ? (
+                <div className="container">
+                  <Switch>
+                    <Route exact path="/" 
+                    render={(props) => <MainContent {...props} user={user} />}
+                    />
+                    <Route
+                      exact
+                      path="/bookingManager"
+                      render={(props) => <BookingManager {...props} user={user} />}
+                    />
+                    <Route
+                      exact
+                      path="/turfDetails"
+                      render={(props) => <TurfDetailsPage {...props} user={user} />}
+                    />
+                  </Switch>
+                </div>
+              ) : (
+                <LoginMaster />
+              )}
+              <BottomSection />
+            {/* </Router> */}
+          </Switch>
 
+        </Router>
+
+
+      </div>
+    </>
   );
 }
 

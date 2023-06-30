@@ -1,64 +1,64 @@
 import { useHistory } from "react-router-dom";
-import React from 'react';
-import Cookies from 'js-cookie';
-import './Navbar.css';
+import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import "./Navbar.css";
+import { Link } from "react-router-dom";
 
-function Navbar() {
-
-  // const [logout, setlogout] = useState(false);
+function Navbar(props) {
+  const [cookies, setCookies] = useState(false);
   const history = useHistory();
 
   const removeCookies = () => {
     // setlogout(!logout)
     Cookies.set("token", "");
-    history.push('/userLogin');
+    history.push("/loginMaster");
     window.location.reload();
   };
+
+  const CheckCookies = () => {
+
+    // if (Cookies.get("token") == "") {
+    //   setCookies(!Cookies);
+    // }
+  };
+
+  // useEffect(() => {
+  //   CheckCookies();
+  
+  // }, [])
+  
 
   return (
     <nav className="navbar">
       <ul>
         <li>
-          <a href="#">
-            <i className="fas fa-futbol"></i>
-            All Sports
-          </a>
+          <Link to="/">Home</Link>
         </li>
         <li>
-          <a href="#">
-            <i className="fas fa-map-marker-alt"></i>
-            See all sports grounds of your city
-          </a>
+          <Link to="#">Turfs</Link>
         </li>
+        {props.user==="manager" && (<li>
+          <Link to="/bookingManager">Manager Booking</Link>
+        </li>  )}      
+        {!props.isLogin && (
+          <>
+            <li>
+              <Link to="/">Login</Link>
+            </li>
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
+          </>
+        )}
+        {props.isLogin && (
+          <li className="logoutbtn" onClick={removeCookies}>
+            {/* <a href="/logout"> */}
+            <a href="#">Logout</a>
+            {/* </a> */}
+          </li>
+        )}
         <li>
-          <a href="#">
-            <i className="fas fa-futbol"></i>
-            Football Ground Booking in India
-          </a>
-        </li>
-        {/* <li>
-          <a href="#">
-            <i className="fas fa-cricket"></i>
-            Cricket Ground Booking in India
-          </a>
-        </li> */}
-        <li>
-          <a href="#">
-            <i className="fas fa-dumbbell"></i>
-            Events Booking in India
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i className="fas fa-tags"></i>
-            Offers & Discounts
-          </a>
-        </li> 
-        <li className='logoutbtn' onClick={removeCookies}>
-          {/* <a href="/logout"> */}
-          <i className="fas fa-sign-out-alt"></i>
-            Logout
-          {/* </a> */}
+          <a href="#">About us</a>
         </li>
       </ul>
     </nav>

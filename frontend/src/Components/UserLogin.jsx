@@ -3,12 +3,10 @@ import axios from "axios"
 import React, { useState, useEffect } from 'react';
 import './UserLogin.css';
 import Cookies from 'js-cookie';
-const google = "/google-logo.png"
 
 const UserLogin = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
   const history = useHistory();
 
   const handleUsernameChange = (event) => {
@@ -28,11 +26,12 @@ const UserLogin = () => {
         password,
       });
 
-      const { success, token } = response.data;
+      const { success, curruser,  token } = response.data;
 
       if (success) {
         // Login successful
         Cookies.set('token', token);
+        Cookies.set('user', curruser);
         console.log("Login Successful")
         history.push('/');        
         window.location.reload();
@@ -45,16 +44,7 @@ const UserLogin = () => {
     }
   };
 
-  const handleGoogleLogin = () => {
-    // Perform Google Sign-In logic
-    window.gapi.auth2.getAuthInstance().signIn().then((googleUser) => {
-      const idToken = googleUser.getAuthResponse().id_token;
-      // You can now use the idToken to authenticate with your server
-      console.log('Google Sign-In Successful:', idToken);
-    }, (error) => {
-      console.error('Google Sign-In Error:', error);
-    });
-  };
+
 
   useEffect(() => {
     // Load the Google Sign-In API
@@ -93,17 +83,13 @@ const UserLogin = () => {
           onChange={handlePasswordChange}
           required
         />
+        <br/>
         <button type="submit">Login</button>
-        <div className="login-options">
-          <button className="google-login-button" onClick={handleGoogleLogin}>
-            <img
-              src="./google-logo.png" // Replace with the path to your Google logo image
-              alt="Google Logo"
-              className="google-logo"
-            />
+        {/* <div className="login-options">
+          <button className="google-login-button">
             Login with Google
           </button>
-        </div>
+        </div> */}
       </form>
     </div>
   );

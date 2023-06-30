@@ -1,26 +1,23 @@
 import React from "react";
 import "./MainContent.css";
 import Navbar from "./Navbar";
+import footballImage from "./football.jpg";
+import basketballImage from "./basketball.jpg";
+import volleyballImage from "./volleyball.jpg";
 
-function MainContent() {
+function MainContent(props) {
   // Generate random turf names and prices
   const generateRandomTurfData = () => {
     const turfs = [
-      { name: "Turf A", price: "$20/hour" },
-      { name: "Turf B", price: "$25/hour" },
-      { name: "Turf C", price: "$18/hour" },
-      { name: "Turf D", price: "$22/hour" },
-      { name: "Turf E", price: "$30/hour" },
-      { name: "Turf F", price: "$15/hour" },
-      { name: "Turf G", price: "$28/hour" },
-      { name: "Turf H", price: "$19/hour" },
-      { name: "Turf I", price: "$24/hour" },
-      { name: "Turf J", price: "$26/hour" },
+      { name: "Football", price: "Rs200/hour", image: footballImage },
+      { name: "Basketball", price: "Rs300/hour", image: basketballImage },
+      { name: "Volleyball", price: "Rs500/hour", image: volleyballImage },
+      // Add more turf data with image URLs
     ];
 
     const randomTurfs = [];
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 9; i++) {
       const randomIndex = Math.floor(Math.random() * turfs.length);
       const randomTurf = turfs[randomIndex];
       randomTurfs.push(randomTurf);
@@ -32,13 +29,13 @@ function MainContent() {
   const randomTurfs = generateRandomTurfData();
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar isLogin={true} user={props.user}/>
       <main className="main-content">
         <div>
-          <h2>
-            Search for the best turf grounds, indoor courts & gymkhana grounds
-            in your city
-          </h2>
+          <div className="head">
+            <h1>Book Your Slots</h1>
+          </div>
+
           <div className="search-bar">
             <input type="text" placeholder="Search" />
             <button>Search</button>
@@ -48,9 +45,12 @@ function MainContent() {
           <h3>Featured Listing</h3>
           <div className="random-turfs">
             {randomTurfs.map((turf, index) => (
-              <div key={index} className="turf-container">
-                <h4>{turf.name}</h4>
-                <p>{turf.price}</p>
+              <div key={index} className="turf-container" style={{ backgroundImage: `url(${turf.image})` }}>
+                {/* <img src={turf.image} alt={turf.name} /> */}
+                <div className="turf-details">
+                  <h4>{turf.name}</h4>
+                  <p>{turf.price}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -116,3 +116,4 @@ function MainContent() {
 }
 
 export default MainContent;
+

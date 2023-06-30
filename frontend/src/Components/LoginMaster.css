@@ -1,0 +1,61 @@
+.login-master {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(to bottom right, purple, black);
+    color: white;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .button-container a{
+    background-color: green;
+    border: none;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* button {
+    background-color: green;
+    border: none;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  } */
+  
+  .button-container a:hover {
+    background-color: rgb(0, 0, 0);
+  }
+  
+  .button-container .user-button {
+    background-color: purple;
+  }
+  
+  .button-container .manager-button {
+    background-color: black;
+  }
+  
+  .button-container .registration-button {
+    background-color: green;
+  }
+  
