@@ -1,10 +1,11 @@
 import { useHistory } from 'react-router-dom';
 import React, { useState } from 'react';
 import './Registration.css';
-import axios from "axios"
+import axios from "axios";
 import Cookies from 'js-cookie';
 
 const Registration = () => {
+  const [errorMessage, setErrorMessage] = useState('');
   const [firstName, setFirstName] = useState('');
   const [middleName, setMiddleName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -14,6 +15,7 @@ const Registration = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+
 
   const history = useHistory();
 
@@ -55,22 +57,33 @@ const Registration = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const regData= {
+  
+    // Validate inputs
+    if (!firstName || !lastName || !age || !username || !password || !confirmPassword || !email || !phone) {
+      setErrorMessage('Please fill in all the fields');
+      return;
+    }
+  
+    if (password !== confirmPassword) {
+      setErrorMessage('Passwords do not match');
+      return;
+    }
+    
+  
+    const regData = {
       firstName,
       middleName,
       lastName,
       age,
       username,
       password,
-      confirmPassword,
       email,
       phone
     };
-
-    await register(regData)
+  
+    await register(regData);
   };
-
+  
   const register = async (regData) => {
     try {
       // const config = { headers: { "Content-Type": "application/json" } };
@@ -91,7 +104,7 @@ const Registration = () => {
       console.log(error);
     }
   }
-
+  
   return (
     <div className="registration-container">
       <form className="registration-form" onSubmit={handleSubmit}>
@@ -138,6 +151,7 @@ const Registration = () => {
           value={password}
           onChange={handlePasswordChange}
           required
+          minLength={8} // Minimum password length
         />
         <input
           type="password"
@@ -145,6 +159,7 @@ const Registration = () => {
           value={confirmPassword}
           onChange={handleConfirmPasswordChange}
           required
+          minLength={8} // Minimum password length
         />
         <input
           type="email"
@@ -160,6 +175,7 @@ const Registration = () => {
           onChange={handlePhoneChange}
           required
         />
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <button type="submit">Register</button>
       </form>
     </div>

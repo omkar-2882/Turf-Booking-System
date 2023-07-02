@@ -17,9 +17,12 @@ const LoginMaster = () => {
     <div className="login-master">
       <h1>Welcome to Turf-King</h1>
       <div className="button-container">
+          
           <Link to="/userlogin" className="user-button">Login As User</Link>
           <Link to="/managerlogin" className="manager-button">Login As Manager</Link>
-          <Link to="/register" className="registration-button">New User Registration</Link>
+          <Link to="/adminlogin" className="admin-button">Admin Login</Link>
+          <Link to="/register" className="registration-button">New Registration</Link>
+          
       </div>
     </div>
     </>
