@@ -50,12 +50,16 @@
   .button-container .user-button {
     background-color: purple;
   }
-  
+
   .button-container .manager-button {
-    background-color: black;
+    background-color: #27ae60;
   }
   
   .button-container .registration-button {
     background-color: green;
+  }
+
+  .button-container .admin-button {
+    background-color: #3498db;
   }
   
