@@ -10,6 +10,7 @@ import MainContent from "./Components/MainContent";
 import BookingManager from "./Components/BookingManager";
 import TurfDetailsPage from "./Components/TurfDetailsPage";
 import LoginMaster from "./Components/LoginMaster";
+import AdminLogin from "./Components/AdminLogin";
 
 import turf from "./turf.jpg"
 
@@ -68,6 +69,7 @@ function App() {
             <Route path="/managerlogin" component={ManagerLogin} />
             <Route path="/register" component={Registration} />
             <Route path="/loginMaster" component={LoginMaster} />
+            <Route path="/adminlogin" component={AdminLogin}/>
             {/* <Router> */}
               {isLoggedin ? (
                 <div className="container">
